@@ -25,7 +25,7 @@ window.renderStatistics = function (ctx, names, times) {
       }
     }
 
-    return maxNumber;
+    return Math.round(maxNumber);
   };
 
   var getRandomColor = function () {
@@ -41,9 +41,9 @@ window.renderStatistics = function (ctx, names, times) {
       ctx.fillStyle = getRandomColor();
     }
 
-    var heightOfColumn = (MAX_HEIGHT_COLUMN * timeOfPlayer) / maxTime;
+    var heightOfColumn = (MAX_HEIGHT_COLUMN * Math.round(timeOfPlayer)) / maxTime;
 
-    while (y + heightOfColumn < 270 - 15) {
+    while (y + heightOfColumn < 270 - 30) {
       y++;
     }
 
@@ -56,7 +56,7 @@ window.renderStatistics = function (ctx, names, times) {
     ctx.fillStyle = '#000000';
     ctx.font = '16px PT Mono';
 
-    ctx.fillText(names[i], j, 270);
+    ctx.fillText(names[i], j, 260);
     drawResultOfPlayer(j, 90, WIDTH_COLUMN, names[i], times[i], times);
 
     j += WIDTH_COLUMN + GAP_BETWEEN_COLUMNS;
