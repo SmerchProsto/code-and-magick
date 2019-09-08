@@ -15,22 +15,49 @@ window.renderStatistics = function (ctx, names, times) {
   var WIDTH_COLUMN = 40;
   var GAP_BETWEEN_COLUMNS = 50;
 
-  var максВысота = 150;
+  var MAX_HEIGHT_COLUMN = 150;
 
-  результатИгрока = функция(x, y, width, height, имяИгрока, времяИгрока) {
-    цикл перебора максимального числа из times, вернет максВремя;
-    имяИгрока === вы ? цвет заливки = rgba(255, 0, 0, 1) : цвет заливки = тоже синий и с рандомными каналами;
-    высотаКолонки = (150 * времяИгрока) / максВремя;
-    нарисуемПрямоугольник(x, y, WIDTH_COLUMN, высотаКолонки);
-    написатьТекст(времяИгрока x, высотаКолонки + 12);
-  }
+  var getMaxTimeOfPlayers = function (arrayTimes) {
+    var maxNumber = 0;
+    for (var i = 0; i < arrayTimes.length; i++) {
+      if (arrayTimes[i] > maxNumber) {
+        maxNumber = arrayTimes[i];
+      }
+    }
+
+    return maxNumber;
+  };
+
+  var getRandomColor = function () {
+    return 'rgb(255, ' + Math.floor(Math.random() * 255) + ', ' + Math.floor(Math.random() * 255) + ')';
+  };
+
+  var drawResultOfPlayer = function (x, y, width, nameOfPlayer, timeOfPlayer, arrayTimes) {
+    var maxTime = getMaxTimeOfPlayers(arrayTimes);
+
+    if (nameOfPlayer === 'Вы') {
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
+    } else {
+      ctx.fillStyle = getRandomColor();
+    }
+
+    var heightOfColumn = (MAX_HEIGHT_COLUMN * timeOfPlayer) / maxTime;
+
+    while (y + heightOfColumn < 270 - 15) {
+      y++;
+    }
+
+    ctx.fillRect(x, y, width, heightOfColumn);
+    ctx.fillStyle = '#000000';
+    ctx.fillText(Math.round(timeOfPlayer), x, y - 12);
+  };
 
   for (var i = 0, j = 140; i < names.length; i++) {
     ctx.fillStyle = '#000000';
     ctx.font = '16px PT Mono';
 
-    ctx.fillText(names[i], j, 240);
-      рисуем результатИгрока(j, 225, width, height)
+    ctx.fillText(names[i], j, 270);
+    drawResultOfPlayer(j, 90, WIDTH_COLUMN, names[i], times[i], times);
 
     j += WIDTH_COLUMN + GAP_BETWEEN_COLUMNS;
   }
