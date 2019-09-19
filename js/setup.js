@@ -29,7 +29,6 @@ var getRandomEyesColor = function () {
 var wizards = [];
 
 var createWizardData = function (amoutOfWizards) {
-  
   for (var i = amoutOfWizards; i >= 0; i--) {
     wizards.push(
         {
