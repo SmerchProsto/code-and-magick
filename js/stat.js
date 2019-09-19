@@ -1,6 +1,10 @@
 'use strict';
 
 window.renderStatistics = function (ctx, names, times) {
+  var WIDTH_COLUMN = 40;
+  var GAP_BETWEEN_COLUMNS = 50;
+  var MAX_HEIGHT_COLUMN = 150;
+
   ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
   ctx.fillRect(110, 20, 420, 270);
 
@@ -11,11 +15,6 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура вы победили!', 115, 40);
   ctx.fillText('Список результатов:', 115, 55);
-
-  var WIDTH_COLUMN = 40;
-  var GAP_BETWEEN_COLUMNS = 50;
-
-  var MAX_HEIGHT_COLUMN = 150;
 
   var getMaxTimeOfPlayers = function (arrayTimes) {
     var maxNumber = 0;
