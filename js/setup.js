@@ -30,11 +30,9 @@ var similarWizardTemplate = document.querySelector('#similar-wizard-template').c
 
 var createWizard = function (amoutOfWizards) {
 
-  var repeatingNumbers = [];
-
   var fragment = document.createDocumentFragment();
-
-  for (var k = 0; k < amoutOfWizards; k++) {
+  var initialLengthWizards = wizards.length;
+  for (var i = initialLengthWizards === 0 ? 0 : initialLengthWizards - 1; i < amoutOfWizards + initialLengthWizards; i++) {
     wizards.push(
         {
           name: getRandomName(),
@@ -42,17 +40,6 @@ var createWizard = function (amoutOfWizards) {
           eyesColor: getRandomEyesColor()
         }
     );
-  }
-
-  for (var index = 0; index < wizards.length; index++) {
-    for (var j = 0; j < wizards.length; j++) {
-      if (wizards[index].name === wizards[j].name && index !== 0) {
-        repeatingNumbers.push(index);
-      }
-    }
-  }
-
-  for (var i = 0; i < amoutOfWizards; i++) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizards[i].name;
