@@ -1,7 +1,37 @@
 'use strict';
 
-var setupBlock = document.querySelector('.setup');
-setupBlock.classList.remove('hidden');
+var setup = document.querySelector('.setup');
+
+var setupOpen = document.querySelector('.setup-open');
+
+var setupClose = document.querySelector('.setup-close');
+
+var onEscPress = function (evt) {
+  if (evt.keyCode === 27) {
+    closePopup();
+  }
+}
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onEscPress);
+};
+
+var onSetupOpenClick = function () {
+  openPopup();
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onEscPress);
+};
+
+var onSetupCloseClick = function () {
+  closePopup();
+};
+
+setupOpen.addEventListener('click', onSetupOpenClick);
+setupClose.addEventListener('click', onSetupCloseClick);
 
 var numberOfWizards = 4;
 
@@ -59,5 +89,4 @@ var createWizard = function (amoutOfWizards) {
 
 };
 
-createWizard(numberOfWizards);
 
