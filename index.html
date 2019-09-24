@@ -62,13 +62,14 @@
 
   <div class="demo"></div>
 
-  <button class="setup-open">
+  <div class="setup-open">
     <img src="./img/user-1.jpg" class="setup-open-icon" tabindex="0">
-  </button>
+  </div>
 </header>
 
 <div class="overlay setup hidden">
   <form class="setup-wizard-form"
+        action="https://js.dump.academy/code-and-magick"
         method="post"
         enctype="multipart/form-data"
         autocomplete="off">
@@ -80,7 +81,7 @@
           <input type="file" name="avatar">
         </div>
         <label>
-          <input type="text" name="username"
+          <input type="text" name="username" minlength="2"
                  maxlength="25" required
                  class="setup-user-name" value="Синий Пендальф"/>
         </label>
@@ -182,7 +183,18 @@
 </template>
 
 <script>
-'use strict';
+  'use strict';
+
+  window.getRandomValue = function (MaxValue, isIncludeMaxValue) {
+    var valueOfFunc;
+    if (isIncludeMaxValue) {
+      valueOfFunc = Math.round(Math.random() * MaxValue);
+    } else {
+      valueOfFunc = Math.floor(Math.random() * MaxValue);
+    }
+
+    return valueOfFunc;
+  };
 
   var fireballSize = 22;
 
